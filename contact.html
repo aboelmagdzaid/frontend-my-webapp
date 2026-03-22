@@ -290,6 +290,7 @@
             }
         }
     </style>
+    <script src="config.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -397,7 +398,7 @@
     </footer>
 
     <script>
-        const API_BASE_URL = 'http://localhost:8000/api'; // Change this to your FastAPI server URL
+        const API_BASE_URL = CONFIG.API.BASE_URL; // Uses environment variable from config.js
 
         const contactForm = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
