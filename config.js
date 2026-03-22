@@ -6,7 +6,7 @@
 const CONFIG = {
     // API Configuration
     API: {
-        BASE_URL: process.env.API_BASE_URL || 'https://your-railway-backend.railway.app/api',
+        BASE_URL: process.env.API_BASE_URL || 'https://backend-my-webap-production.up.railway.app:8080/api',
         TIMEOUT: 30000, // 30 seconds
         HEADERS: {
             'Content-Type': 'application/json',

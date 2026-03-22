@@ -237,7 +237,6 @@
             }
         }
     </style>
-    <script src="config.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -292,7 +291,17 @@
         <p>&copy; 2024 مكتب أبوالمجد عبدالشافى. جميع الحقوق محفوظة.</p>
     </footer>
 
+    <script src="config.js"></script>
     <script>
+        // Fallback if config.js doesn't load
+        if (typeof CONFIG === 'undefined') {
+            window.CONFIG = {
+                API: {
+                    BASE_URL: 'https://backend-my-webap-production.up.railway.app:8080/api'
+                }
+            };
+        }
+
         const API_BASE_URL = CONFIG.API.BASE_URL; // Uses environment variable from config.js
 
         const loginForm = document.getElementById('loginForm');
