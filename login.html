@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - مكتب ابوالمجد عبدالشافى</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📊</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'DM Sans', sans-serif;
+            background-color: #fafafa;
+            color: #18181b;
+            line-height: 1.6;
+        }
+
+        :root {
+            --brand-600: #4f46e5;
+            --brand-700: #4338ca;
+            --surface-950: #09090b;
+            --surface-900: #18181b;
+            --surface-600: #52525b;
+            --surface-200: #e4e4e7;
+        }
+
+        nav {
+            background-color: var(--surface-950);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-brand-icon {
+            width: 2rem;
+            height: 2rem;
+            background-color: var(--brand-600);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .login-container {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .login-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-card h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .login-card p {
+            color: var(--surface-600);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--surface-200);
+            border-radius: 0.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--brand-600);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background-color: var(--brand-600);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--brand-700);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .alert-error {
+            background-color: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #991b1b;
+        }
+
+        .alert-success {
+            background-color: #dcfce7;
+            border: 1px solid #86efac;
+            color: #166534;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--surface-600);
+        }
+
+        .login-link a {
+            color: var(--brand-600);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        input[type="radio"] {
+            cursor: pointer;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .spinner {
+            border: 3px solid var(--surface-200);
+            border-top: 3px solid var(--brand-600);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        footer {
+            background-color: var(--surface-950);
+            color: white;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .login-card {
+                padding: 1.5rem;
+            }
+
+            .login-card h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <div class="nav-brand-icon">AAM</div>
+                <span>مكتب أبوالمجد عبدالشافى</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="login-card">
+            <h1>تسجيل الدخول</h1>
+            <p>ادخل بيانات حسابك للوصول إلى لوحة التحكم</p>
+
+            <div id="alertContainer"></div>
+
+            <form id="loginForm">
+                <!-- User Number -->
+                <div class="form-group">
+                    <label for="userNumber">رقم المستخدم</label>
+                    <input type="text" id="userNumber" name="userNumber" required placeholder="أدخل رقم المستخدم الخاص بك">
+                    <small id="roleInfo" style="color: #6366f1; margin-top: 5px; display: block;"></small>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group" id="passwordGroup" style="display: none;">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور">
+                </div>
+
+                <!-- Loading Indicator -->
+                <div class="loading" id="loadingIndicator">
+                    <div class="spinner"></div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" id="loginBtn">دخول</button>
+            </form>
+
+            <div class="login-link">
+                ليس لديك حساب؟ <a href="contact.html">تواصل معنا</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 مكتب أبوالمجد عبدالشافى. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8000/api'; // Change this to your FastAPI server URL
+
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const alertContainer = document.getElementById('alertContainer');
+
+        // Check user role when user number is entered
+        document.getElementById('userNumber').addEventListener('change', async (e) => {
+            const userNumber = e.target.value.trim();
+            const passwordGroup = document.getElementById('passwordGroup');
+            const roleInfo = document.getElementById('roleInfo');
+            const passwordInput = document.getElementById('password');
+            
+            if (!userNumber) {
+                passwordGroup.style.display = 'none';
+                roleInfo.textContent = '';
+                passwordInput.removeAttribute('required');
+                return;
+            }
+            
+            try {
+                // Check if user exists and get their role
+                const response = await fetch(`${API_BASE_URL}/check-user/${userNumber}`);
+                const data = await response.json();
+                
+                if (response.ok && data.user) {
+                    const role = data.user.role;
+                    
+                    if (role === 'client') {
+                        // Clients don't need password
+                        passwordGroup.style.display = 'none';
+                        roleInfo.textContent = '✓ رقم تسجيل عميل - يمكنك الدخول بدون كلمة مرور';
+                        roleInfo.style.color = '#10b981';
+                        passwordInput.removeAttribute('required');
+                    } else {
+                        // Other roles need password
+                        passwordGroup.style.display = 'block';
+                        
+                        const roleLabel = {
+                            'worker': 'موظف',
+                            'admin': 'مسؤول',
+                            'technical_support': 'الدعم الفني'
+                        }[role] || role;
+                        
+                        roleInfo.textContent = `رقم ${roleLabel} - الرجاء إدخال كلمة المرور`;
+                        roleInfo.style.color = '#f59e0b';
+                        passwordInput.setAttribute('required', 'required');
+                    }
+                } else {
+                    roleInfo.textContent = '⚠ رقم مستخدم غير موجود';
+                    roleInfo.style.color = '#ef4444';
+                    passwordGroup.style.display = 'none';
+                    passwordInput.removeAttribute('required');
+                }
+            } catch (error) {
+                console.error('Error checking user:', error);
+            }
+        });
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const userNumber = document.getElementById('userNumber').value.trim();
+            const password = document.getElementById('password').value;
+            const passwordGroup = document.getElementById('passwordGroup');
+
+            // Reset alerts
+            alertContainer.innerHTML = '';
+
+            // Validation
+            if (!userNumber) {
+                showAlert('الرجاء إدخال رقم المستخدم', 'error');
+                return;
+            }
+
+            // If password field is shown, require it
+            if (passwordGroup.style.display !== 'none' && !password) {
+                showAlert('الرجاء إدخال كلمة المرور', 'error');
+                return;
+            }
+
+            // Show loading
+            loadingIndicator.style.display = 'block';
+            loginBtn.disabled = true;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        user_number: userNumber,
+                        password: password || '' // Send empty string for clients
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Store token and user info
+                    localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    localStorage.setItem('userRole', data.user.role);
+
+                    showAlert('تم تسجيل الدخول بنجاح!', 'success');
+
+                    // Redirect based on role
+                    setTimeout(() => {
+                        switch(data.user.role) {
+                            case 'client':
+                                window.location.href = 'dashboard-client.html';
+                                break;
+                            case 'worker':
+                                window.location.href = 'dashboard-worker.html';
+                                break;
+                            case 'admin':
+                                window.location.href = 'dashboard-admin.html';
+                                break;
+                            case 'technical_support':
+                                window.location.href = 'dashboard-support.html';
+                                break;
+                            default:
+                                window.location.href = 'dashboard.html';
+                        }
+                    }, 1500);
+                } else {
+                    showAlert(data.detail || 'فشل تسجيل الدخول. الرجاء التحقق من البيانات', 'error');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('حدث خطأ في الاتصال بالخادم. الرجاء المحاولة لاحقاً', 'error');
+            } finally {
+                // Hide loading
+                loadingIndicator.style.display = 'none';
+                loginBtn.disabled = false;
+            }
+        });
+
+        function showAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertContainer.appendChild(alertDiv);
+        }
+
+        // Clear password on page load for security
+        window.addEventListener('load', () => {
+            document.getElementById('password').value = '';
+        });
+    </script>
+</body>
+</html>
